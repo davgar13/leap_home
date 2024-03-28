@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class MyWidget extends StatefulWidget {
-  const MyWidget({super.key});
+class CategoryPage extends StatefulWidget {
+  const CategoryPage({super.key});
 
   @override
-  State<MyWidget> createState() => _MyWidgetState();
+  State<CategoryPage> createState() => _CategoryPageState();
 }
 
-class _MyWidgetState extends State<MyWidget> {
+class _CategoryPageState extends State<CategoryPage> {
   @override
   Widget build(BuildContext context) {
     return const Placeholder();
