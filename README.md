@@ -14,6 +14,7 @@ La aplicación cuenta con 3 roles de usuario:
 3.	Usuario Dueño, este usuario tendrá las mismas funcionalidades del usuario hogar, este rol tiene el objetivo de que un usuario(no institución o refugio) pueda dar en adopción alguna mascota por x motivos.
 
 Limitaciones: 
+
 •	En esta Versión no se podrán comunicar directamente dentro de la misma plataforma.
 •	No se implementará un buscador.
 •	La app requerirá de conexión a internet.
