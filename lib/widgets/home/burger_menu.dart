@@ -1,7 +1,9 @@
 
 import 'package:flutter/material.dart';
+import 'package:leap_home/utils/colors.dart';
 
 import '../../models/users_model.dart';
+import '../../pages/options/add_adopt_pets.dart';
 
 class BurgerMenu extends StatelessWidget {
   const BurgerMenu({super.key});
@@ -17,14 +19,8 @@ class BurgerMenu extends StatelessWidget {
               children: <Widget>[
                 Container(
                   margin: const EdgeInsets.only(bottom: 10),
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: <Color>[
-                        Color(0xFFb8860b),
-                        Color(0xFFcd9c0b),
-                        Color(0xFFffd700)
-                      ]
-                    ),
+                  decoration: BoxDecoration(
+                    gradient: Colores.gradientLinear2,
                   ),
                   alignment: Alignment.bottomCenter,
                   height: 120,
@@ -35,10 +31,10 @@ class BurgerMenu extends StatelessWidget {
                     child: const ListTile(
                     leading: CircleAvatar(
                       radius: 30,
-                      backgroundImage: AssetImage('assets/icons/icon.png',),
+                      backgroundImage: AssetImage('assets/icon/IconNormal.png',),
                     ),
                     title: Text(
-                      'Sucursal Alemana',
+                      'Más que Mascotas,\nSon Familia',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -55,7 +51,7 @@ class BurgerMenu extends StatelessWidget {
                     left: 15,
                   ),
                   child: const Text(
-                    'Opciones de Consulta',
+                    'Opciones de Generales',
                     style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
@@ -72,15 +68,21 @@ class BurgerMenu extends StatelessWidget {
                 Container(
                   margin: const EdgeInsets.only(left: 15),
                   child: ListTile(
-                    leading: const Icon(Icons.account_circle),
-                    title: const Text('Ver Personal'),
+                    leading: Image(
+                      image: AssetImage(
+                        'assets/images/addPet.png',
+                        ),
+                        width: 33,
+                        height: 33,
+                      ),
+                    title: const Text('Dar en Adopción'),
                     onTap: () {
-                      /*Navigator.push(
+                      Navigator.push(
                         context, 
                         MaterialPageRoute(
-                          builder: (context) => const PersonalView(),
+                          builder: (context) => const AddAdoptPets(),
                         ),
-                      );*/
+                      );
                     },
                   ),
                 ),

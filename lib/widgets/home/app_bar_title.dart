@@ -5,7 +5,12 @@ class AppBarTitle extends StatelessWidget {
   final Color newColor;
   final String title;
   final String? subtitle;
-  const AppBarTitle({super.key, required this.newColor, required this.title, this.subtitle});
+  const AppBarTitle({
+    super.key, 
+    required this.newColor, 
+    required this.title, 
+    this.subtitle
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +22,7 @@ class AppBarTitle extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-              fontSize: 22,
+              fontSize: 21,
               fontWeight: FontWeight.bold,
               color: newColor,
             ),

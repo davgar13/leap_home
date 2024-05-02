@@ -4,7 +4,7 @@ import 'package:leap_home/pages/auth/register_dates_screen.dart';
 import 'package:leap_home/widgets/return_page.dart';
 
 import '../../utils/colors.dart';
-import '../../widgets/button_auth.dart';
+import '../../widgets/btn/button_auth.dart';
 import '../home_page.dart';
 
 class LoginScreen extends StatefulWidget {

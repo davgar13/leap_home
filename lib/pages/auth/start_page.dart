@@ -3,7 +3,7 @@ import 'package:leap_home/pages/auth/register_dates_screen.dart';
 import 'package:leap_home/pages/auth/login_screen.dart';
 
 import '../../utils/colors.dart';
-import '../../widgets/button_auth.dart';
+import '../../widgets/btn/button_auth.dart';
 
 class StartPage extends StatefulWidget {
   const StartPage({super.key});

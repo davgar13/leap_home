@@ -8,7 +8,7 @@ import 'package:leap_home/widgets/forms/form_login.dart';
 import 'package:leap_home/widgets/forms/form_select_login.dart';
 
 import '../../utils/colors.dart';
-import '../../widgets/button_auth.dart';
+import '../../widgets/btn/button_auth.dart';
 import '../../widgets/return_page.dart';
 
 class RegisterDatesScreen extends StatefulWidget {

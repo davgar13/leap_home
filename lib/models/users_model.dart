@@ -24,6 +24,7 @@ class UserModel {
         'image': doc['image'],
         'telefono': doc['telefono'],
         'email': doc['email'],
+        'userType': doc['user_type'],
       };
     }).toList();
   }
@@ -44,6 +45,7 @@ class UserModel {
       'image': data?['image'],
       'telefono': data?['telefono'],
       'email': data?['email'],
+      'userType': data?['user_type'],
     };
   }
 
@@ -63,7 +65,21 @@ class UserModel {
       'image': data?['image'],
       'telefono': data?['telefono'],
       'email': data?['email'],
+      'userType': data?['user_type'],
     };
+  }
+
+  Future<DocumentSnapshot> getUserData(String userId) {
+    return FirebaseFirestore.instance
+        .collection('Usuarios')
+        .where('user_id' ,isEqualTo: userId)
+        .get()
+        .then((snapshot) {
+      if (snapshot.docs.isNotEmpty) {
+        return snapshot.docs.first;
+      }
+      throw Exception('No se encontró el usuario seleccionado');
+    });
   }
 
   Future<String> getCurrentUserImage() async {
@@ -81,6 +97,15 @@ class UserModel {
     .get();
     final data = snapshot.data();
     return data?['nombre'] + ' ' + data?['apellido'];
+  }
+  
+  getUserNamePet(userId) async {
+    final DocumentSnapshot<Map<String, dynamic>> snapshot = await _firestore
+    .collection('Usuarios')
+    .doc(userId)
+    .get();
+    final data = snapshot.data();
+    return data?['nombre'] + data?['apellido'];
   }
 
   Future<void> updateUser(Map<String, dynamic> data) async {

@@ -12,7 +12,14 @@ class AppBarIconProfile extends StatelessWidget{
       future: UserModel().getCurrentUserImage(), 
       builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator(); 
+          return const SizedBox(
+            width: 20,
+            height: 20,
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              strokeWidth: 2.0, 
+            ) 
+          );
         } else if (snapshot.hasError) {
           return const Icon(Icons.error); 
         } else {

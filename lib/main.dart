@@ -26,16 +26,12 @@ class MainApp extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.active) {
-            // Verifica si el usuario está autenticado
             if (snapshot.hasData) {
-              // Usuario autenticado, dirigir a HomePage
               return HomePage();
             } else {
-              // Usuario no autenticado, dirigir a StartPage
               return const StartPage();
             }
           }
-          // Mientras espera, mostrar un indicador de carga
           return const Center(child: CircularProgressIndicator());
         },
       ),

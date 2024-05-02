@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:leap_home/pages/home/category.dart';
+import 'package:leap_home/pages/home/ini_home.dart';
+import 'package:leap_home/pages/home/pets.dart';
+import 'package:leap_home/widgets/home/app_bar_title_image.dart';
 
 import '../utils/colors.dart';
-import '../widgets/home/app_bar_title.dart';
 import '../widgets/home/appbar_icon_profile.dart';
 import '../widgets/home/burger_menu.dart';
 
@@ -16,7 +19,9 @@ class _HomePageState extends State<HomePage> {
   int selectedIndex = 0;
 
 final List<Widget> widgetOptions = <Widget>[
-  
+  const IniHome(),
+  const PetsPage(),
+  const CategoryPage(),
 ];
 
 void onItemTapped(int index) {
@@ -29,15 +34,11 @@ void onItemTapped(int index) {
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Colors.black,
-          title: const AppBarTitle(
-            newColor: Colors.white,
-            title: 'LeapHome',
-            subtitle: 'Creandores de estilo',
-          ),
+          title: const AppBarTitleImage(),
           leading: AppBarIconProfile(),
       ),
       endDrawer: const BurgerMenu(),
-      backgroundColor: Colores.white,
+      backgroundColor: Colores.pageColor,
       bottomNavigationBar:Theme(
         data: Theme.of(context).copyWith(
           canvasColor: Colors.black, // Cambia el color de fondo aquí
@@ -49,19 +50,21 @@ void onItemTapped(int index) {
               label: 'Inicio',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.content_cut_outlined ),
+              icon: Icon(Icons.pets_rounded),
               label: 'Mascotas',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.shopify_rounded),
+              icon: Icon(Icons.category_rounded),
               label: 'Categorías',
             ),
             
           ],
           currentIndex: selectedIndex,
-          selectedItemColor: Colors.amber[800],
+          selectedItemColor: Colores.azure,
           unselectedItemColor: Colors.white,
           onTap: onItemTapped,
+          selectedFontSize: 15,
+          selectedIconTheme: IconThemeData(size: 30),
         ),
       ),
       body: 

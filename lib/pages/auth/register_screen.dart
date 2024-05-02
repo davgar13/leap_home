@@ -7,7 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:path/path.dart' as p;
 
 import '../../utils/colors.dart';
-import '../../widgets/button_auth.dart';
+import '../../widgets/btn/button_auth.dart';
 import '../../widgets/return_page.dart';
 import '../home_page.dart';
 
@@ -84,12 +84,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
           final imageUrl = await _uploadImageAndGetDownloadUrl(widget.imageUser!);
           
           await FirebaseFirestore.instance.collection('Usuarios').doc(currentUser!.uid).set({
+            'user_id' : currentUser.uid,
             'nombre': widget.nameUser.text,
             'apellido': widget.lastNameUser.text,
             'fecha_Nacimiento': widget.birthDateUser.text,
             'genero': widget.sexUser.text,
             'telefono': widget.phoneUser.text,
-            'tipo_usuario': widget.typeUser.text,  
+            'user_type': widget.typeUser.text,  
             'email': email,
             'image': imageUrl,
           });
