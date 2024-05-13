@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:leap_home/pages/home/pets.dart';
 import 'package:leap_home/utils/colors.dart';
 import 'package:leap_home/utils/my_lists.dart';
 import 'package:leap_home/widgets/forms/form_textarea.dart';
@@ -24,6 +25,7 @@ class AddAdoptPets extends StatefulWidget {
 
 class _AddAdoptPetsState extends State<AddAdoptPets> {
   final formkey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final TextEditingController _namePetController = TextEditingController();
   final TextEditingController _typePetController = TextEditingController();
   final TextEditingController _ageAPetController = TextEditingController();
@@ -155,33 +157,54 @@ class _AddAdoptPetsState extends State<AddAdoptPets> {
           'imageUrl3': imageUrl3,
           'status': 'En Adopcion',
         });
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Mascota subida correctamente'),
-            duration: Duration(seconds: 2),
-            backgroundColor: Colores.orange,
-            elevation: 10,
-          )
+        formClean();
+        showDialog(
+          context: _scaffoldKey.currentContext!,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Correcto...'),
+              content: const Text('Mascota subida correctamente'),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('OK'),
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(context, 
+                    MaterialPageRoute(builder: (context) => const PetsPage()), 
+                    (route) => false);
+                  },
+                ),
+              ],
+            );
+          },
         );
       } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: ListTile(
-              title: Text('Error al subir la mascota'),
-              subtitle: Text('Por favor intenta de nuevo'),
-            ),
-            duration: Duration(seconds: 2),
-            backgroundColor: Colores.red,
-            elevation: 10,
-          )
+        Navigator.of(_scaffoldKey.currentContext!,rootNavigator: true).pop(); 
+        showDialog(
+          context: _scaffoldKey.currentContext!,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Error...'),
+              content: ListTile(
+                title: const Text('Al parecer hubo un error al subir la mascota...'),
+                subtitle: Text('Porfavor verifica los datos e intenta nuevamente...'),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('OK'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
         );
       } finally {
         setState(() {
           _isLoading = false;
         });
       }
-      formClean();
+      
     }
   }
 
@@ -216,6 +239,7 @@ class _AddAdoptPetsState extends State<AddAdoptPets> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Colors.black,
       body: Form(
         key: formkey,

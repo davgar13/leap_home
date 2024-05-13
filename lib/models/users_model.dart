@@ -49,6 +49,15 @@ class UserModel {
     };
   }
 
+  Future<String> getUserEmailFormId(String userId) async {
+    final DocumentSnapshot<Map<String, dynamic>> snapshot = await _firestore
+    .collection('Usuarios')
+    .doc(userId)
+    .get();
+    final data = snapshot.data();
+    return data?['email'];
+  }
+
   Future<Map<String, dynamic>> getUserDataFormId(String userId) async {
     final DocumentSnapshot<Map<String, dynamic>> snapshot = await _firestore
     .collection('Usuarios')

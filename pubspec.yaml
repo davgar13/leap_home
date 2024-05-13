@@ -15,15 +15,15 @@ dependencies:
   firebase_core: ^2.22.0
   firebase_storage: ^11.6.0
   image_picker: ^1.0.7
-  intl: ^0.18.1
+  intl: ^0.19.0
   mailer: ^6.0.1
   url_launcher: ^6.2.4
   firebase_app_check: ^0.2.1+8
+  flutter_launcher_icons: ^0.13.1
   
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: ^0.13.1
 
 flutter_launcher_icons:
   android: "launcher_icon"
@@ -36,5 +36,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/images/LeapHome_post.png
     - assets/icon/
     - assets/carrusel/
+    - assets/images/Social/

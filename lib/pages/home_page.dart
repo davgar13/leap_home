@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:leap_home/pages/home/category.dart';
 import 'package:leap_home/pages/home/ini_home.dart';
 import 'package:leap_home/pages/home/pets.dart';
+import 'package:leap_home/pages/profile/my_profile.dart';
 import 'package:leap_home/widgets/home/app_bar_title_image.dart';
 
 import '../utils/colors.dart';
@@ -35,7 +37,14 @@ void onItemTapped(int index) {
       appBar: AppBar(
           backgroundColor: Colors.black,
           title: const AppBarTitleImage(),
-          leading: AppBarIconProfile(),
+          leading: AppBarIconProfile(
+            onPressed: () => Navigator.push(context, 
+                MaterialPageRoute(builder: (context) => MyProfilePage(
+                  userId: FirebaseAuth.instance.currentUser!.uid,
+                ),
+              )
+            ),
+          ),
       ),
       endDrawer: const BurgerMenu(),
       backgroundColor: Colores.pageColor,

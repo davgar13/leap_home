@@ -150,7 +150,10 @@ class PostList extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => PetInfoPage( petInfoID: posts[index].id),
+                                  builder: (context) => PetInfoPage( 
+                                    petInfoID: posts[index].id,
+                                    ownerId: post['idPerson'],
+                                  ),
                                 ),
                               );
                             }, 

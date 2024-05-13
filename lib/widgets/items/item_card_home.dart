@@ -10,6 +10,7 @@ class ItemCardHome extends StatelessWidget{
   final String image;
   final String? idPet;
   final String? idHome;
+  final String idOwner;
   final double elevation;
   final BuildContext context;
   
@@ -21,6 +22,7 @@ class ItemCardHome extends StatelessWidget{
     required this.elevation,  
     this.idHome, 
     required this.context, 
+    required this.idOwner
   });
 
   void redir() {
@@ -28,7 +30,10 @@ class ItemCardHome extends StatelessWidget{
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => PetInfoPage(petInfoID: idPet!),
+          builder: (context) => PetInfoPage(
+            petInfoID: idPet!, 
+            ownerId: idOwner,
+          ),
         ),
       );
     } /*else if (idSer != null) {

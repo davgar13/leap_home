@@ -58,6 +58,7 @@ class _IniHomeState extends State<IniHome> {
                             return ItemCardHome(
                               title: doc['name'],
                               image: doc['imageUrl'],
+                              idOwner: doc['id_owner'],
                               elevation: 5,
                               context: context,
                               idPet: doc['id'],

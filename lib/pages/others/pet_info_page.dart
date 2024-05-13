@@ -1,15 +1,22 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';  
 import 'package:flutter/material.dart';
+import 'package:leap_home/pages/others/adop_form.dart';
 import 'package:leap_home/widgets/btn/button_sec.dart';
 import 'package:leap_home/widgets/items/card_simple.dart';
 import 'package:leap_home/widgets/items/user_present.dart';
 
+import '../../models/users_model.dart';
 import '../../utils/colors.dart';
 import '../../widgets/items/card_present.dart';
 
 class PetInfoPage extends StatefulWidget {
   final String petInfoID;
-  const PetInfoPage({super.key, required this.petInfoID});
+  final String ownerId;
+  const PetInfoPage({
+    super.key, 
+    required this.petInfoID,
+    required this.ownerId
+  });
 
   @override
   State<PetInfoPage> createState() => _PetInfoPageState();
@@ -17,11 +24,13 @@ class PetInfoPage extends StatefulWidget {
 
 class _PetInfoPageState extends State<PetInfoPage> {
   late Future<DocumentSnapshot> futureService;
+  late Future<String> dateUser;
 
   @override
   void initState() {
     super.initState();
     futureService = FirebaseFirestore.instance.collection('Pet_Person').doc(widget.petInfoID).get();
+    dateUser = UserModel().getUserEmailFormId(widget.ownerId);
   }
 
   @override
@@ -79,23 +88,37 @@ class _PetInfoPageState extends State<PetInfoPage> {
                               ),
                               Align(
                                 alignment: Alignment.topRight,
-                                child: Container(
-                                  margin: const EdgeInsets.only(right: 20, top: 20),
-                                  child: Container(
-                                      margin: const EdgeInsets.all(10),
-                                      child: ButtonSec(
-                                        textValue: 'Adoptar', 
-                                        onPressed: (){}, 
-                                        newColor: Colors.white, 
-                                        fontColor: Colors.black, 
-                                        height: 35, 
-                                        fontSize: 20, 
-                                        borderTopLeftRadius: 10, 
-                                        borderTopRightRadius: 20, 
-                                        borderBottomLeftRadius: 20, 
-                                        borderBottomRightRadius: 10)
-                                    )
-                                  ),
+                                child: FutureBuilder<String>(
+                                  future: dateUser,
+                                  builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                                    if (snapshot.connectionState == ConnectionState.waiting) {
+                                      return const CircularProgressIndicator();
+                                    } else if (snapshot.hasError) {
+                                      return Text('Error: ${snapshot.error}');
+                                    } else {
+                                      return Container(
+                                        margin: const EdgeInsets.only(right: 20, top: 20),
+                                        child: Container(
+                                            margin: const EdgeInsets.all(10),
+                                            child: ButtonSec(
+                                              textValue: 'Adoptar', 
+                                              onPressed: (){
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => AdoptionFormScreen(ownerEmail: snapshot.data!)));
+                                                print(snapshot.data!);
+                                              }, 
+                                              newColor: Colors.white, 
+                                              fontColor: Colors.black, 
+                                              height: 35, 
+                                              fontSize: 20, 
+                                              borderTopLeftRadius: 10, 
+                                              borderTopRightRadius: 20, 
+                                              borderBottomLeftRadius: 20, 
+                                              borderBottomRightRadius: 10)
+                                          )
+                                        );
+                                    }
+                                  }
+                                ),
                               )
                             ],
                           ),

@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 import '../../models/users_model.dart';
 
 class AppBarIconProfile extends StatelessWidget{
- const AppBarIconProfile({super.key});
+  final Function()? onPressed;
+  const AppBarIconProfile({
+    super.key,
+    this.onPressed
+    });
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +33,7 @@ class AppBarIconProfile extends StatelessWidget{
               radius: 17,
               backgroundImage: NetworkImage(snapshot.data!),
             ),
-            onPressed: () {
-              /*Navigator.push(context, 
-                MaterialPageRoute(builder: (context) => ProfileView(
-                  userId: FirebaseAuth.instance.currentUser!.uid,
-                ))
-              );*/
-            },
+            onPressed: onPressed,
           );
         }
       },
